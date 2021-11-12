@@ -1,0 +1,16 @@
+.retina-border(@border: border, @color: #d7d7d7, @position: relative) {
+  position: @position;
+  &:after {
+    content: '';
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    @{border}: 1px solid @color;
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    box-sizing: border-box;
+  }
+}
