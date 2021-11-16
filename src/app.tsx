@@ -8,11 +8,12 @@ import { RoutePath } from '~/interfaces';
 import Vis from '~/pages/Vis';
 import G6Graph from '~/pages/G6';
 import ForceGraph from '~/pages/ForceGraph';
+import CytoscapePage from '~/pages/Cytoscape';
 // import Mine from '~/pages/Mine';
 // import LabWrapper from '~/components/LabWrapper';
 import styles from './app.module.less';
 
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 
 const history = createBrowserHistory();
 
@@ -24,8 +25,10 @@ function App() {
     <Layout className={styles.layout}>
       <Switch>
         <Route exact path="/" component={() => <Vis />} />
+        <Route exact path="/vis" component={() => <Vis />} />
         <Route exact path="/g6" component={() => <G6Graph />} />
         <Route exact path="/force-graph" component={() => <ForceGraph />} />
+        <Route exact path="/cytoscape" component={() => <CytoscapePage />} />
         <Route path="/:labId/:labSubRoute?">
           <Content className={styles.content}>
             <Switch>
@@ -37,7 +40,7 @@ function App() {
         </Route>
         <Route component={() => <NotFound />} />
       </Switch>
-      <Footer style={{ textAlign: 'center' }}>footer</Footer>
+      {/* <Footer style={{ textAlign: 'center' }}>footer</Footer> */}
     </Layout>
   );
 }

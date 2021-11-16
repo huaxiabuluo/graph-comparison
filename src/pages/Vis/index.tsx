@@ -29,8 +29,8 @@ export default function Vis() {
         size: 50,
         scaling: {
           min: 30,
-          max: 70
-        }
+          max: 70,
+        },
         // fixed: true,
       },
       edges: {
@@ -67,9 +67,25 @@ export default function Vis() {
         // maxVelocity: 100,
         minVelocity: 3,
         // hierarchicalRepulsion: {
-        //   springConstant: 1,
-        //   centralGravity: 100
+        //   // springConstant: 1,
+        //   // centralGravity: 100,
+        //   // avoidOverlap: 1,
         // },
+      },
+      layout: {
+        // randomSeed: 1,
+        hierarchical: {
+          enabled: false,
+          levelSeparation: 150,
+          nodeSpacing: 100,
+          treeSpacing: 200,
+          blockShifting: true,
+          edgeMinimization: true,
+          parentCentralization: true,
+          direction: 'UD', // UD, DU, LR, RL
+          sortMethod: 'hubsize', // hubsize, directed
+          shakeTowards: 'leaves', // roots, leaves
+        },
       },
     };
 
@@ -86,12 +102,12 @@ export default function Vis() {
     graph.setSelection({
       nodes: dataRef.current.nodes.getIds(),
       edges: dataRef.current.edges.getIds(),
-    })
+    });
     // graph.selectEdges(dataRef.current.edges.getIds());
   }, []);
 
   const clearAll = useCallback(() => {
-    graphRef.current.unselectAll()
+    graphRef.current.unselectAll();
   }, []);
 
   return (
