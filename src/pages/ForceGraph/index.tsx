@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import ForceGraph, { ForceGraphInstance, NodeObject } from 'force-graph';
 import { Button } from 'antd';
-import { observer } from 'mobx-react-lite';
 import { nodes, links } from '~/mock';
 import styles from './index.module.less';
 
@@ -47,7 +46,7 @@ const mockData = { nodes, links };
 
 const nodeSelected = new Set<NodeObject>([]);
 
-export default observer(function ForceGraphPage() {
+export default function ForceGraphPage() {
   const grapfDomRef = useRef<HTMLDivElement>();
   const grapfRef = useRef<ForceGraphInstance>();
   const physicsRef = useRef(true);
@@ -134,4 +133,4 @@ export default observer(function ForceGraphPage() {
       </div>
     </div>
   );
-});
+}
