@@ -2,25 +2,25 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { Button } from 'antd';
 import { Network, Options } from 'vis-network/esnext';
 import { DataSet } from 'vis-data';
-import nodesMock from '~/mock/node.json';
-import edgesMock from '~/mock/edge.json';
+import { nodes, links } from '~/mock';
+// import nodesMock from '~/mock/node.json';
+// import edgesMock from '~/mock/edge.json';
 // import mockData from '~/dataset/nogroup.json';
 import styles from './index.module.less';
 
 const edgeSet = new Set([]);
-const resetEdgesMock = edgesMock.map((edge) => {
-  const id = `${edge.from}-${edge.to}`;
+const resetEdgesMock = links.map(({ id, source: from, target: to }, index) => {
   if (edgeSet.has(id)) {
-    return { ...edge, smooth: { enabled: true, type: 'curvedCW', roundness: -0.15 } };
+    return { id, from, to, smooth: { enabled: true, type: 'curvedCW', roundness: -0.15 } };
   }
   edgeSet.add(id);
-  return edge;
+  return { id, from, to };
 });
 
 export default function Vis() {
   const domRef = useRef<HTMLDivElement>();
   const graphRef = useRef<Network>();
-  const dataRef = useRef({ nodes: new DataSet(nodesMock), edges: new DataSet(resetEdgesMock) });
+  const dataRef = useRef({ nodes: new DataSet(nodes), edges: new DataSet(resetEdgesMock) });
 
   useEffect(() => {
     const option: Options = {
@@ -56,6 +56,7 @@ export default function Vis() {
         hover: true,
       },
       physics: {
+        enabled: false,
         stabilization: false,
         barnesHut: {
           gravitationalConstant: -30000,
@@ -101,7 +102,7 @@ export default function Vis() {
     // graph.selectNodes(dataRef.current.nodes.getIds());
     graph.setSelection({
       nodes: dataRef.current.nodes.getIds(),
-      edges: dataRef.current.edges.getIds(),
+      // edges: dataRef.current.edges.getIds(),
     });
     // graph.selectEdges(dataRef.current.edges.getIds());
   }, []);

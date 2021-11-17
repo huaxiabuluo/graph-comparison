@@ -65,35 +65,38 @@ export const graphCfg: Omit<GraphOptions, 'container'> = {
 export const graphModeCfg = {
   default: [
     {
-      type: 'drag-node', 
-    }, 
+      type: 'drag-node',
+    },
+    {
+      type: 'drag-canvas',
+    },
     {
       type: 'brush-select',
-      trigger: 'drag'
-    }, 
+      trigger: 'drag',
+    },
     {
       type: 'zoom-canvas',
       sensitivity: 1,
       enableOptimize: true,
       minZoom: 0.2,
-      maxZoom: 2.5
-    }
+      maxZoom: 2.5,
+    },
   ],
   mode_multi_select: [
     {
-      type: 'drag-node', 
-    }, 
+      type: 'drag-node',
+    },
     {
       type: 'brush-select',
-      trigger: 'drag'
-    }, 
+      trigger: 'drag',
+    },
     {
       type: 'zoom-canvas',
       sensitivity: 1,
       enableOptimize: true,
       minZoom: 0.2,
-      maxZoom: 2.5
-    }
+      maxZoom: 2.5,
+    },
   ],
   mode_move: [
     {
@@ -105,6 +108,7 @@ export const graphModeCfg = {
       sensitivity: 1,
       enableOptimize: true,
       minZoom: 0.2,
-      maxZoom: 2.5
-    }],
+      maxZoom: 2.5,
+    },
+  ],
 };

@@ -15,6 +15,7 @@
     "removeComments": true,
     "resolveJsonModule": true,
     "strictNullChecks": false,
+    "downlevelIteration": true,
     "outDir": "build",
     "lib": ["es6", "es7", "dom"],
     "baseUrl": ".",

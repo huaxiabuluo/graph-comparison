@@ -2,8 +2,11 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { Button } from 'antd';
 import G6, { Graph } from '@antv/g6';
 import { graphCfg, graphModeCfg } from './config/graphConfig';
-import mockData from './mock/index.json';
+// import mockData from './mock/index.json';
+import { nodes, links } from '~/mock';
 import styles from './index.module.less';
+
+const mockData = { nodes, edges: links };
 
 export default function G6Graph() {
   const domRef = useRef<HTMLDivElement>();
@@ -20,16 +23,12 @@ export default function G6Graph() {
       ...graphCfg,
       modes: graphModeCfg,
       layout: {
-        type: 'gForce',
-        nodeSize: 47,
-        linkDistance: 200,
-        nodeSpacing: 50,
+        type: 'forceAtlas2',
         preventOverlap: true,
-        damping: 0.5,
-        maxSpeed: 2000,
-        maxIteration: 700,
-        workerEnabled: true,
-        gpuEnabled: true,
+        kr: 10,
+        center: [250, 250],
+        // workerEnabled: true,
+        // gpuEnabled: true,
       },
     });
 
@@ -44,7 +43,7 @@ export default function G6Graph() {
     const graph = graphRef.current;
     const nodes = graph.getNodes();
     graph.setAutoPaint(false);
-    nodes.forEach(node => graph.setItemState(node, 'selected', true));
+    nodes.forEach((node) => graph.setItemState(node, 'selected', true));
     graph.setAutoPaint(true);
     graph.paint();
   }, []);
@@ -52,7 +51,7 @@ export default function G6Graph() {
   const clearAll = useCallback(() => {
     const graph = graphRef.current;
     const nodes = graph.getNodes();
-    nodes.forEach(node => graph.setItemState(node, 'selected', false));
+    nodes.forEach((node) => graph.setItemState(node, 'selected', false));
   }, []);
 
   return (
